@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ankan Ghosh — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#05060a; --card:#0e1116; --muted:#9aa3b2; --accent:#7c5cff; --accent-2:#00d4ff; --glass:rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.06), transparent 10%), radial-gradient(900px 400px at 90% 90%, rgba(0,212,255,0.03), transparent 10%), var(--bg); color:#eaf0ff; padding:26px;
+    }
+
+    /* Layout */
+    .wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+
+    /* Sidebar */
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:22px;position:relative;overflow:hidden;box-shadow:0 12px 50px rgba(2,6,23,0.65);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Animated avatar */
+    .avatar-wrap{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:12px;position:relative;z-index:5}
+    .avatar{width:220px;height:220px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;margin:6px auto;transition:transform .24s ease;}
+    .avatar .photo{width:92%;height:92%;border-radius:50%;overflow:hidden;background:#0b0c10;display:flex;align-items:center;justify-content:center}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;transform:translateZ(0)}
+
+    /* Particle halo */
+    .halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:360px;height:360px;pointer-events:none;border-radius:50%;filter:blur(30px);mix-blend-mode:screen;opacity:0.7}
+    .halo:before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 20%, rgba(124,92,255,0.25), transparent 18%), radial-gradient(circle at 70% 80%, rgba(0,212,255,0.18), transparent 18%);}
+
+    /* Orbit rings */
+    .orbit{position:absolute;inset:0;border-radius:50%;pointer-events:none}
+    .orbit.o1{box-shadow:0 0 40px 8px rgba(124,92,255,0.06) inset;animation:spin 20s linear infinite}
+    .orbit.o2{box-shadow:0 0 30px 6px rgba(0,212,255,0.04) inset;animation:spin 26s linear reverse infinite}
+    .orbit.o3{box-shadow:0 0 18px 2px rgba(255,255,255,0.02) inset;animation:spin 34s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* floating sparkles */
+    .sparkle{position:absolute;width:6px;height:6px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(124,92,255,0.3);opacity:0.9;animation:float 6s ease-in-out infinite}
+    .s1{left:12%;top:6%;animation-duration:5.2s}
+    .s2{left:70%;top:8%;animation-duration:7.4s}
+    .s3{left:84%;top:64%;animation-duration:5.8s}
+    .s4{left:8%;top:74%;animation-duration:8.2s}
+    @keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-18px) translateX(8px)}100%{transform:translateY(0) translateX(0)}}
+
+    h1{font-family:'Space Grotesk', Inter;font-weight:700;margin:0;font-size:1.6rem}
+    .role{color:var(--muted);font-size:0.95rem;margin-top:6px}
+
+    /* social buttons */
+    .socials{display:flex;gap:12px;margin-top:14px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,0.04);transition:transform .18s ease, box-shadow .18s ease}
+    .socials a:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+
+    .contact-card{margin-top:18px;padding:14px;background:var(--glass);border-radius:12px}
+    .contact-card p{margin:0;color:var(--muted);font-size:0.95rem}
+
+    /* Main content */
+    .main{min-height:72vh;padding:26px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:18px;box-shadow:0 12px 50px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    .intro{display:flex;gap:20px;align-items:center}
+    .intro h2{margin:0 0 6px 0;font-size:1.35rem}
+    .intro p{margin:0;color:var(--muted)}
+
+    .cta{margin-top:14px;display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:12px;border:0;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#02111a;font-weight:700}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Projects grid */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-height:120px;position:relative;overflow:hidden}
+    .card h3{margin:0 0 8px 0}
+    .card p{margin:0;color:var(--muted);font-size:0.92rem}
+
+    /* Certificates gallery */
+    .certs{margin-top:22px}
+    .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .cert-thumb{aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#0b0c10;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .2s}
+    .cert-thumb img{width:100%;height:100%;object-fit:cover}
+    .cert-thumb:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 24px 60px rgba(2,6,23,0.6)}
+
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(2,4,12,0.8);display:none;align-items:center;justify-content:center;padding:24px;z-index:999}
+    .modal.open{display:flex}
+    .modal img{max-width:95%;max-height:85%;border-radius:10px;box-shadow:0 40px 120px rgba(2,6,23,0.85)}
+
+    footer{margin-top:28px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* Responsive */
+    @media (max-width:980px){.wrap{grid-template-columns:1fr;padding:10px}.sidebar{order:2}.main{order:1}.grid{grid-template-columns:1fr}.certs-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:520px){.certs-grid{grid-template-columns:1fr}.avatar{width:140px;height:140px}.avatar .photo{width:90%;height:90%}}
+
+    /* reveal */
+    .reveal{transform:translateY(18px);opacity:0;transition:all .7s cubic-bezier(.2,.9,.2,1)}
+    .reveal.visible{transform:none;opacity:1}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="sparkle s1"></div>
+      <div class="sparkle s2"></div>
+      <div class="sparkle s3"></div>
+      <div class="sparkle s4"></div>
+
+      <div class="avatar-wrap">
+        <div class="avatar" id="profile">
+          <div class="orbit o1"></div>
+          <div class="orbit o2"></div>
+          <div class="orbit o3"></div>
+          <div class="photo">
+            <img src="ankanIEM.jpg" alt="Ankan Ghosh" id="avatarImg">
+          </div>
+        </div>
+
+        <div style="text-align:center">
+          <h1>Ankan Ghosh</h1>
+          <div class="role">B.Tech • Computer Science and Engineering (CSE) with a specialization in Internet of Things (IoT), Cyber Security, and Blockchain Technology (BCT)</div>
+          <div class="role">Institute of Engineering & Management (IEM)</div>
+        </div>
+
+        <div class="socials" aria-label="social links">
+          <a href="https://www.instagram.com/ankan546/" target="_blank" title="Instagram"> 
+            <!-- Instagram SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z" stroke="white" stroke-opacity="0.9" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z" stroke="white" stroke-opacity="0.9" stroke-width="1.4"></path><path d="M17.5 6.5h.01" stroke="white" stroke-opacity="0.9" stroke-width="1.6" stroke-linecap="round"></path></svg>
+          </a>
+
+          <a href="https://www.facebook.com/profile.php?id=100089223105586" target="_blank" title="Facebook">
+            <!-- Facebook SVG -->
+            <svg width="18" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h2V2z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ankan-ghosh-827627384/" target="_blank" title="LinkedIn">
+            <!-- LinkedIn SVG -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v6h-4v-12h4v1.7" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6 9H2v12h4z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="contact-card reveal">
+        <p><strong>Email:</strong> ankan.ghosh2025u@iem.edu.in</p>
+        <p style="margin-top:8px;color:var(--muted)">Open to internships, freelance and collaborations.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="intro reveal">
+        <div style="flex:1">
+          <h2>Hi — I'm Ankan. I build embedded systems, and interactive web experiences.</h2>
+          <p style="margin-top:8px;color:var(--muted)">I specialize in Arduino-based robotics (obstacle avoidance, voice & Bluetooth control), sensor data processing, and clean web UI ( HTML , CSS and C ). Below you'll find projects, certificates, and contact links.</p>
+
+          <div class="cta">
+            <button class="btn" onclick="scrollToSection('projects')">See Projects</button>
+            <button class="ghost" onclick="scrollToSection('certs')">Certificates</button>
+          </div>
+        </div>
+        <div style="width:220px;text-align:center">
+          <div style="padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)">
+            <div style="font-weight:800;font-size:1.6rem">5+</div>
+            <div style="color:var(--muted);font-size:0.95rem">Projects</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="reveal">
+        <h3 style="margin:0 0 8px 0">Featured Projects</h3>
+        <div class="grid">
+          <article class="card">
+            <h3>Smart Arduino Robot</h3>
+            <p>Obstacle avoidance with ultrasonic sensors, voice commands and Bluetooth mobile control.</p>
+          </article>
+          <article class="card">
+            <h3>Embedded Sensor Hub</h3>
+            <p>Low-power data logger with I2C sensors and simple web dashboard for visualization.</p>
+          </article>
+          <article class="card">
+            <h3>Signal Processing Toolkit</h3>
+            <p>Tools for sensor data filtering, FFT analysis and basic feature extraction for ML pipelines.</p>
+          </article>
+          <article class="card">
+            <h3>Personal Website</h3>
+            <p>Responsive portfolio with animated visuals and certificate gallery.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="certs" class="certs reveal">
+        <h3 style="margin-top:18px">Certificates</h3>
+        <p style="color:var(--muted);margin-top:6px">Click any certificate to view it larger. Files are expected inside a folder named <strong>ALL C</strong> (same level as this HTML).</p>
+
+        <div class="certs-grid" id="certsGrid"></div>
+      </section>
+
+      <footer class="reveal">
+        <p>Designed & coded by Ankan • <a href="https://ankan546.github.io/Ankan/" target="_blank" style="color:var(--accent)">Original</a></p>
+      </footer>
+    </main>
+  </div>
+
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <img id="modalImg" src="" alt="certificate preview">
+  </div>
+
+  <script>
+    // Avatar tilt + gentle pulse
+    const avatar = document.getElementById('profile');
+    const avatarImg = document.getElementById('avatarImg');
+    avatar.addEventListener('mousemove', (e)=>{
+      const r = avatar.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      avatar.style.transform = `perspective(900px) rotateX(${(-y*9)}deg) rotateY(${(x*9)}deg) translateZ(6px)`;
+      avatarImg.style.transform = `translateZ(28px) scale(1.03)`;
+    });
+    avatar.addEventListener('mouseleave', ()=>{ avatar.style.transform='none'; avatarImg.style.transform='none'; });
+
+    // hover pulse
+    setInterval(()=>{ avatar.animate([{transform:'scale(1)'},{transform:'scale(1.008)'},{transform:'scale(1)'}],{duration:4200,iterations:1}); },4500);
+
+    // reveal on scroll
+    const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});}
+
+    // Certificates list (c1..c19 inside ALL C folder)
+    const certFilenames = [
+      'ALL C/c1.jpg','ALL C/c2.jpg','ALL C/c3.jpg','ALL C/c4.jpg','ALL C/c5.jpg','ALL C/c6.jpg','ALL C/c7.jpg','ALL C/c8.jpg','ALL C/c9.jpg','ALL C/c10.jpg','ALL C/c11.jpg','ALL C/c12.jpg','ALL C/c13.jpg','ALL C/c14.jpg','ALL C/c15.jpg','ALL C/c16.jpg','ALL C/c17.jpg','ALL C/c18.jpg'
+    ];
+
+    const certsGrid = document.getElementById('certsGrid');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+
+    function loadCertificates(){
+      certsGrid.innerHTML='';
+      certFilenames.forEach((f, idx)=>{
+        const div = document.createElement('div');
+        div.className='cert-thumb';
+        const img = document.createElement('img');
+        img.src = f;
+        img.alt = `Certificate ${idx+1}`;
+        img.loading='lazy';
+        img.onerror = ()=>{ div.innerHTML = '<div style="color:var(--muted);font-size:0.9rem;padding:10px;text-align:center">Not found: '+f.split('/').pop()+'</div>'; };
+        div.appendChild(img);
+        div.addEventListener('click', ()=>openModal(f));
+        certsGrid.appendChild(div);
+      });
+    }
+    function openModal(src){ modal.classList.add('open'); modalImg.src = src; }
+    function closeModal(e){ if(e.target.id==='modal' || e.target.id==='modalImg') { modal.classList.remove('open'); modalImg.src=''; } }
+    document.addEventListener('keyup', (e)=>{ if(e.key==='Escape') modal.classList.remove('open'); })
+
+    loadCertificates();
+  </script>
+</body>
+</html>
